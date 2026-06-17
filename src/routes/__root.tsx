@@ -163,9 +163,9 @@ function AppLayout() {
           </header>
           <main className="flex-1">
             <Outlet />
-          </main>
         </div>
       </div>
+      <Toaster richColors closeButton />
     </SidebarProvider>
   );
 }
