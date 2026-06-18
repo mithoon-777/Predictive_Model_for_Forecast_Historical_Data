@@ -8,9 +8,16 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
   tanstackStart: {
-    // Build as a static SPA so the output in `dist/` is deployable to
-    // Vercel, Netlify, Firebase Hosting, GitHub Pages, etc.
-    spa: { enabled: true },
+    // Build as a static SPA so the output is deployable to Vercel, Netlify,
+    // Firebase Hosting, GitHub Pages, etc. Prerender only the empty shell —
+    // do not try to SSR app routes (they're client-only).
+    spa: {
+      enabled: true,
+      prerender: {
+        outputPath: "/_shell",
+        crawlLinks: false,
+      },
+    },
     server: { entry: "server" },
   },
 });
