@@ -1,5 +1,9 @@
 # Forecastr — Predictive Analytics Dashboard
 
+## Live Demo
+https://predictive-model-for-forecast-histo.vercel.app/
+
+## Overview
 A modern, in-browser predictive analytics dashboard. Upload historical CSV data, clean and preprocess it, train regression / time-series models, and visualize future forecasts — all client-side, no backend required.
 
 ## Features
