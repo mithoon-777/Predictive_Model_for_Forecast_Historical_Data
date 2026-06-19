@@ -5,26 +5,20 @@
 //     error logger plugins, and sandbox detection (port/host/strictPort).
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
-// Detect Lovable's in-sandbox build (preview/dev). Inside the sandbox we keep
-// the default SSR build so Lovable's preview works. Outside (Vercel, Netlify,
-// Firebase, GitHub Pages, etc.) we switch to a static SPA build so the output
-// in dist/client/ is a deployable single-page app.
-const isLovableSandbox =
-  !!process.env.DEV_SERVER__PROJECT_PATH || !!process.env.LOVABLE_SANDBOX;
-
 export default defineConfig({
+  // This app is fully client-side, so build a static SPA shell for every
+  // environment. That avoids route prerender/SSR crashes on Node 22 while still
+  // producing deployable assets in dist/client/.
+  nitro: false,
   tanstackStart: {
-    server: { entry: "server" },
-    ...(isLovableSandbox
-      ? {}
-      : {
-          spa: {
-            enabled: true,
-            prerender: {
-              outputPath: "/_shell",
-              crawlLinks: false,
-            },
-          },
-        }),
+    spa: {
+      enabled: true,
+      prerender: {
+        outputPath: "/_shell",
+        crawlLinks: false,
+        failOnError: false,
+        retryCount: 0,
+      },
+    },
   },
 });
