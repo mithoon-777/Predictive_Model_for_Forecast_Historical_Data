@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build && node -e \"const fs=require('fs');if(fs.existsSync('dist/client/_shell.html'))fs.copyFileSync('dist/client/_shell.html','dist/client/index.html')\"",
-    "build:dev": "vite build --mode development",
+    "build": "vite build && node scripts/ensure-spa-index.mjs",
+    "build:dev": "vite build --mode development && node scripts/ensure-spa-index.mjs",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write ."

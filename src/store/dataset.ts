@@ -72,9 +72,8 @@ export const useDatasetStore = create<State>()(
     }),
     {
       name: "predictive-analytics-store",
-      storage: createJSONStorage(() =>
-        typeof window !== "undefined" ? window.localStorage : (undefined as unknown as Storage)
-      ),
+      storage: createJSONStorage(() => localStorage),
+      skipHydration: typeof window === "undefined",
     }
   )
 );
